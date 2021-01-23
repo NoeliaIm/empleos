@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Tabla</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link th:href="@{css/style.css}" rel="stylesheet">
+</head>
+<body>
+<img th:src="@{/images/logotipo-gratis-1.png}">
+<table class="table table-striped table-hover table-bordered">
+  <tr>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Fecha</th>
+    <th>Salario</th>
+    <th>Destacada</th>
+  </tr>
+  <tr th:each="vacante: ${tablaVacantes}">
+    <td th:text="${vacante.nombre}"></td>
+    <td th:text="${vacante.descripcion}"></td>
+    <td th:text="${vacante.fecha}"></td>
+    <td th:text="${vacante.salario}"></td>
+   <!--   <td th:text="${vacante.destacado} ==1  ? 'Si':'No'"></td>        -->
+    <td>
+     <span th:if="${vacante.destacado==1}" class= "badge bg-success">Si</span>
+     <span th:unless="${vacante.destacado==1}" class= "badge bg-danger">No</span>
+     </td>
+     <td>
+      <a th:href="@{/vacantes/mostrarDetalle/{id}(id = ${vacante.id})}" class="btn btn-primary" role="button">Ver detalle</a></td> 
+     <!-- @RequestParam <a th:href="@{/vacantes/mostrarDetalle(id = ${vacante.id})}" class="btn btn-primary" role="button">Ver detalle</a></td> -->
+  	<td>
+  	<a th:href="@{/vacantes/delete(id = ${vacante.id})}" class="btn btn-danger">Borrar</a>
+  	</td>
+  </tr>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
